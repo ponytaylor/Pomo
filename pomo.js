@@ -1,24 +1,36 @@
 
 let timerTotal = 0;
-let nowtime = document.getElementById("nowtime");
+//let nowtime = document.getElementById("nowtime");
 var worktimer;
+var breaktimer;
+var paused = false;
 
-
+var saveEndWork = null;
+var saveStartWork = null;
+var pauseTime = null;
 
 let tbreak = document.getElementById("breakTime");
 
 function startWork() {
-    console.log("work");
+    //console.log("work");
     var dStart = new Date(Date.now());
-    console.log(dStart);
+    if(saveStartWork != null){
+        dStart = saveStartWork;
+    }
+    saveStartWork = dStart;
+    //console.log(dStart);
     let timeleft = document.getElementById("timeleft");
-
+    var prog = document.getElementById("progBar");   
     var workspinner = $( "#workTime" ).spinner();
     var tworktime = workspinner.spinner( "value" );
     
     var stoptime = tworktime * 60 * 1000; // milliseconds
     var dEnd = new Date(dStart.getTime() + stoptime);
-    console.log(tworktime, stoptime, dEnd);
+    if(saveEndWork != null){
+        dEnd = saveEndWork;
+    }
+    saveEndWork = dEnd;
+    //console.log(tworktime, stoptime, dEnd);
 
     worktimer = setInterval(worker, 1000);
     function worker() {
@@ -35,31 +47,103 @@ function startWork() {
         clearInterval(worktimer);
         mins = 0;
         seconds = 0;
-     
-      
-            var sound = document.getElementById("doneSound");
-            sound.play();
-    
-
+        var sound = document.getElementById("doneSound");
+        sound.play();
+        startBreak();
       } else {
 
         if (width < 30){
             timeleft.style.color = "red";
+            prog.style.backgroundColor = "red";
         }
         else if (width < 60){
             timeleft.style.color = "orange";
+            prog.style.backgroundColor = "red";
         }
         else if (width < 100){
             timeleft.style.color = "#4DAF55";
+            prog.style.backgroundColor = "red";
         }
-        timeleft.style.width = width + '%'; 
+        //timeleft.style.width = width + '%'; 
+        prog.style.width = width + '%';
       }
+      if (seconds < 10){
+          seconds = "0" + seconds;
+      }
+      if (mins < 10){
+        mins = "0" + mins;
+    }
       timeleft.innerHTML = mins + ":" + seconds;
     }
   }
 
+  function startBreak() {
+    //console.log("break");
+    var dStart = new Date(Date.now());
+    //console.log(dStart);
+    let timeleft = document.getElementById("btimeleft");
+    var progb = document.getElementById("bprogBar");   
+    var breakspinner = $( "#breakTime" ).spinner();
+    var tbreaktime = breakspinner.spinner( "value" );
+    
+    var stoptime = tbreaktime * 60 * 1000; // milliseconds
+    var dEnd = new Date(dStart.getTime() + stoptime);
+    //console.log(tbreaktime, stoptime, dEnd);
+
+    breaktimer = setInterval(breaker, 1000);
+    function breaker() {
+    var dNow = Date.now();
+      width = (dNow - dStart)/stoptime * 100;
+      tleft = new Date(dEnd - dNow); 
+      var mins = Math.floor(tleft / (1000 * 60));
+      tleft -= mins * (1000 * 60);
+      
+      var seconds = Math.floor(tleft / (1000));
+      tleft -= seconds * (1000);
+      
+      if (dNow >= dEnd) {
+        clearInterval(breaktimer);
+        mins = 0;
+        seconds = 0;
+        var sound = document.getElementById("doneSound");
+        sound.play();
+
+      } else {
+        progb.style.width = width + '%';
+      }
+      if (seconds < 10){
+          seconds = "0" + seconds;
+      }
+      if (mins < 10){
+        mins = "0" + mins;
+    }
+      timeleft.innerHTML = mins + ":" + seconds;
+    }
+  }
+
+
 function pauseWork(){
+    if(!paused){
+        clearInterval(worktimer);
+        paused = true;
+    }
+    else{
+        //use pause time to adjust start & end times
+        paused = false;
+        startWork();
+      
+    }
+    
+}
+function reset(){
     clearInterval(worktimer);
+    clearInterval(breaktimer);
+    document.getElementById("progBar").style.width = "10px";  
+    document.getElementById("bprogBar").style.width = "10px"; 
+    document.getElementById("timeleft").innerHTML = "";
+    document.getElementById("btimeleft").innerHTML = ""; 
+    saveEndWork = null;
+    saveStartWork = null;
 }
 
 
@@ -87,10 +171,3 @@ function runWork() {
     }
   }
 
-function myTimer() {
-    var d = new Date();
-    var t = d.toLocaleTimeString();
-    document.getElementById("demo").innerHTML = t;
-}
-
-setInterval(myTimer, 1000);

@@ -26,23 +26,23 @@
 
 <div class="controls">
   <button class="controlbutton" onClick="startWork()">Start Work</button>
-  <button  class="controlbutton" onClick="pauseWork()">Pause </button>
+  <button  class="controlbutton smbutton" onClick="pauseWork()">Pause </button>
+  <button  class="controlbutton smbutton" onClick="reset()">Reset </button>
 </div>
 
 </div>
 
-<div clss="progress">
-  <div>Time Left: <span class="timeleft" id="timeleft"></span></div> 
-   
-  <h1 id="taskname">Work</h1>
-  <p id="demo"></p>
-  <div id="myProgress">
-    <div id="myBar"></div>
-  </div>
+<div class="progress">
+  <div class="progTask">Work <span class="timeleft" id="timeleft"></span></div>
+  <div class="progDiv">  <div id="progBar"></div> </div>
 </div>
-  <br>
-  <button onclick="runWork()">Click Me</button> 
-  
+
+<div class="progress">
+      <div class="progTask">Break <span class="timeleft" id="btimeleft"></span></div>
+      <div class="progDiv">  <div id="bprogBar"></div> </div>
+    
+    </div>
+ 
   <audio id="doneSound" src="http://bigpinkpurse.com/accordion/sounds/1out.wav" autostart="false" ></audio>
   
  
