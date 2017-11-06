@@ -1,0 +1,63 @@
+.numberChooser {
+    height: 30px;
+    width: 40px;
+  }
+  
+  .arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    
+    border-top: 100px solid #f00;
+  }
+  
+  .arrow-up {
+    width: 0; 
+    height: 0; 
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    
+    border-bottom:100px solid black;
+  }
+
+  #myProgress {
+    width: 50%;
+    margin: auto;
+    height: 30px;
+    position: relative;
+    background-color: #ddd;
+  }
+  
+  #myBar {
+    background-color: #4CAF50;
+    width: 10px;
+    height: 30px;
+    position: absolute;
+  }
+
+  .controlbutton {
+      width: 25%;
+      height: 100px;
+      background-color: pink;
+      border-radius: 30%;
+      color:#f442df;
+      font-size: 2em;
+      font-family:'Henny Penny', cursive;
+  }
+  .setup{
+      display: flex;
+      flex-direction: row;
+      font-size: 1.5em;
+      padding: 20px;
+    }
+    .chooseTime{
+        margin: 20px;
+    }
+
+  .timercontainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    margin: 0px 20%;
+  }

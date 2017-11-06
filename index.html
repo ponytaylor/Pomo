@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pomodoro</title>
+
+    <link href="https:fonts.googleapis.com/css?family=Annie+Use+Your+Telescope|Henny+Penny" rel="stylesheet" >
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="pomo.css">
+    <script src="pomo.js"></script>
+</head>
+<body>
+ <div class="timercontainer">
+    <div class="setup">
+        <div class="chooseTime">
+        Work time: <input id="workTime" class="numberChooser" value="5">
+    </div>
+    <div class="chooseTime">
+        Break time: <input id="breakTime" class="numberChooser" value="5">
+    </div>
+    </div>
+
+<div class="controls">
+  <button class="controlbutton" onClick="startWork()">Start Work</button>
+  <button  class="controlbutton" onClick="pauseWork()">Pause </button>
+</div>
+
+</div>
+
+<div clss="progress">
+  <div>Time Left: <span class="timeleft" id="timeleft"></span></div> 
+   
+  <h1 id="taskname">Work</h1>
+  <p id="demo"></p>
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+</div>
+  <br>
+  <button onclick="runWork()">Click Me</button> 
+  
+  <audio id="doneSound" src="http://bigpinkpurse.com/accordion/sounds/1out.wav" autostart="false" ></audio>
+  
+ 
+  <!-- <div class="arrow-down"></div>
+  <div class="arrow-up"></div> -->
+  <script>
+  $( "#breakTime" ).spinner();
+  $( "#workTime" ).spinner();
+  </script>
+   
+</body>
+</html>
