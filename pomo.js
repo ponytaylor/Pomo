@@ -3,7 +3,10 @@ let timerTotal = 0;
 //let nowtime = document.getElementById("nowtime");
 var worktimer;
 var breaktimer;
+var looptimer;
+
 var paused = false;
+var looping = true;
 
 var saveEndWork = null;
 var saveStartWork = null;
@@ -31,7 +34,7 @@ function startWork() {
     }
     saveEndWork = dEnd;
     //console.log(tworktime, stoptime, dEnd);
-
+    startbtn.innerHTML = "Working";
     worktimer = setInterval(worker, 1000);
     function worker() {
     var dNow = Date.now();
@@ -49,23 +52,26 @@ function startWork() {
         seconds = 0;
         var sound = document.getElementById("doneSound");
         sound.play();
+        startbtn.innerHTML = "Start Work";
+     
         startBreak();
       } else {
 
         if (width < 30){
-            timeleft.style.color = "red";
-            prog.style.backgroundColor = "red";
+            timeleft.style.color = "brown";
+            prog.style.backgroundColor = "brown";
         }
         else if (width < 60){
             timeleft.style.color = "orange";
-            prog.style.backgroundColor = "red";
+            prog.style.backgroundColor = "orange";
         }
         else if (width < 100){
             timeleft.style.color = "#4DAF55";
-            prog.style.backgroundColor = "red";
+            prog.style.backgroundColor = "#4DAF55";
         }
         //timeleft.style.width = width + '%'; 
         prog.style.width = width + '%';
+      
       }
       if (seconds < 10){
           seconds = "0" + seconds;
@@ -85,7 +91,7 @@ function startWork() {
     var progb = document.getElementById("bprogBar");   
     var breakspinner = $( "#breakTime" ).spinner();
     var tbreaktime = breakspinner.spinner( "value" );
-    
+    startbtn.innerHTML = "Break!";
     var stoptime = tbreaktime * 60 * 1000; // milliseconds
     var dEnd = new Date(dStart.getTime() + stoptime);
     //console.log(tbreaktime, stoptime, dEnd);
@@ -107,6 +113,7 @@ function startWork() {
         seconds = 0;
         var sound = document.getElementById("doneSound");
         sound.play();
+      
 
       } else {
         progb.style.width = width + '%';
@@ -121,6 +128,19 @@ function startWork() {
     }
   }
 
+  function work(){
+    var breaksp = $( "#breakTime" ).spinner();
+    var breakt = breaksp.spinner( "value" );
+    var worksp = $( "#workTime" ).spinner();
+    var workt = worksp.spinner( "value" );
+    var totaltime = (breakt + workt) * 60 * 1000;
+    console.log("work");
+    startWork();
+    looptimer = setInterval(function() {
+        reset();
+        startWork();
+      }, totaltime + 2000); // add time for sounds
+  }
 
 function pauseWork(){
     if(!paused){
@@ -144,6 +164,8 @@ function reset(){
     document.getElementById("btimeleft").innerHTML = ""; 
     saveEndWork = null;
     saveStartWork = null;
+    startbtn.innerHTML = "Start Work";
+ 
 }
 
 

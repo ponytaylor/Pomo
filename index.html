@@ -19,31 +19,32 @@
         <div class="chooseTime">
         Work time: <input id="workTime" class="numberChooser" value="5">
     </div>
-    <div class="chooseTime">
+    <img class="icon" src="bppicon.png">
+    <div class="chooseTime righter">
         Break time: <input id="breakTime" class="numberChooser" value="5">
     </div>
     </div>
 
 <div class="controls">
-  <button class="controlbutton" onClick="startWork()">Start Work</button>
-  <button  class="controlbutton smbutton" onClick="pauseWork()">Pause </button>
-  <button  class="controlbutton smbutton" onClick="reset()">Reset </button>
+  <button class="controlbutton" id="startbtn" onClick="work()">Start Work</button>
+  <button  class="controlbutton" onClick="reset()">Reset </button>
 </div>
 
 </div>
 
 <div class="progress">
-  <div class="progTask">Work <span class="timeleft" id="timeleft"></span></div>
+  <div class="progTask">Work <span class="timeleft" id="timeleft">00:00</span></div>
   <div class="progDiv">  <div id="progBar"></div> </div>
 </div>
 
 <div class="progress">
-      <div class="progTask">Break <span class="timeleft" id="btimeleft"></span></div>
+      <div class="progTask">Break <span class="timeleft" id="btimeleft">00:00</span></div>
       <div class="progDiv">  <div id="bprogBar"></div> </div>
     
     </div>
  
-  <audio id="doneSound" src="http://bigpinkpurse.com/accordion/sounds/1out.wav" autostart="false" ></audio>
+  <audio id="doneSound" src="http://bigpinkpurse.com/accordion/sounds/2in.wav" autostart="false" ></audio>
+  <audio id="breakSound" src="http://bigpinkpurse.com/accordion/sounds/2out.wav" autostart="false" ></audio>
   
  
   <!-- <div class="arrow-down"></div>
