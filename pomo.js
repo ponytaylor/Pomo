@@ -1,6 +1,3 @@
-
-let timerTotal = 0;
-//let nowtime = document.getElementById("nowtime");
 var worktimer;
 var breaktimer;
 var looptimer;
@@ -169,27 +166,4 @@ function reset(){
 }
 
 
-function runWork() {
-    console.log("move");
-    var elem = document.getElementById("myBar");   
-    var width = 0;
-    var id = setInterval(frame, 1000);
-    function frame() {
-      if (width == 100) {
-        clearInterval(id);
-      } else {
-        width++; 
-        if (width < 30){
-            elem.style.backgroundColor = "red";
-        }
-        else if (width < 60){
-            elem.style.backgroundColor = "yellow";
-        }
-        else if (width < 100){
-            elem.style.backgroundColor = "#4DAF55";
-        }
-        elem.style.width = width + '%'; 
-      }
-    }
-  }
 
